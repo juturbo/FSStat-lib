@@ -12,8 +12,8 @@ public class Test {
     public static void main(String[] args) throws Exception {
         FSStatLib lib = new FSStatLib();
         
-        String targetDir = ".";
-        long maxFileSize = 1 * MB;
+        String targetDir = "src/testFolder";
+        long maxFileSize =  KB / 2;
         int numberOfBands = 4;
 
         var startTime = System.currentTimeMillis();
