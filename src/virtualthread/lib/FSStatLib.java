@@ -43,7 +43,7 @@ public class FSStatLib {
                 }
             }
         } catch (IOException e) {
-            System.err.println("Error reading directory: " + dir + " - " + e.getMessage());
+            // skip directories that cannot be opened.
         }
 
         FSReport currentReport = new FSReport(totalFiles, distribution);
