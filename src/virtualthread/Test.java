@@ -6,15 +6,15 @@ import virtualthread.lib.FSReport;
 import virtualthread.lib.FSStatLib;
 
 public class Test {
-    private static final long KB = 1024; // 1 KB
-    private static final long MB = KB * 1024; // 1 MB
+    private static final long KB = 1024;
+    private static final long MB = KB * 1024;
 
     public static void main(String[] args) throws Exception {
         FSStatLib lib = new FSStatLib();
         
-        String targetDir = "."; 
-        long maxFileSize = 1 * MB; // 1 MB
-        int numberOfBands = 4;      
+        String targetDir = ".";
+        long maxFileSize = 1 * MB;
+        int numberOfBands = 4;
 
         var startTime = System.currentTimeMillis();
         Future<FSReport> reportFuture = lib.getFSReport(targetDir, maxFileSize, numberOfBands);
