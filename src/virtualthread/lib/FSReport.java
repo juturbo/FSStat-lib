@@ -1,7 +1,5 @@
 package virtualthread.lib;
 
-import java.util.Arrays;
-
 public record FSReport(long totalFiles, long[] distribution) {
 
     public FSReport merge(FSReport other) {
@@ -13,13 +11,5 @@ public record FSReport(long totalFiles, long[] distribution) {
         }
         
         return new FSReport(newTotal, newDistribution);
-    }
-
-    @Override
-    public String toString() {
-        return "FSReport{" +
-            "totalFiles=" + totalFiles +
-            ", distribution=" + Arrays.toString(distribution) +
-            '}';
     }
 }

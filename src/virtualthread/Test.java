@@ -17,19 +17,37 @@ public class Test {
         int numberOfBands = 4;      
 
         System.out.println("Starting analysis...");
-
+        var startTime = System.currentTimeMillis();
         Future<FSReport> reportFuture = lib.getFSReport(targetDir, maxFileSize, numberOfBands);
+        System.out.println("Analysis in progress in background.\n");
 
-        System.out.println("Analysis in progress in background. Executing other operations in the main thread...");
+        FSReport report = reportFuture.get();
+        var elapsedTime = System.currentTimeMillis() - startTime;
 
-        FSReport report = reportFuture.get(); 
-
-        System.out.println("\n=== REPORT COMPLETED ===");
+        System.out.println("Report generated in " + elapsedTime + " ms:");
         System.out.println("Total files: " + report.totalFiles());
+        long bandSize = maxFileSize / numberOfBands;
         for (int i = 0; i < numberOfBands; i++) {
-            System.out.printf("Band %d: %d files%n", i, report.distribution()[i]);
+            long lowerBound = i * bandSize;
+            long upperBound = (i == numberOfBands - 1) ? maxFileSize : ((i + 1) * bandSize) - 1;
+            System.out.printf(
+                "Band %d [%s - %s]: %d files%n",
+                i,
+                formatSize(lowerBound),
+                formatSize(upperBound),
+                report.distribution()[i]
+            );
         }
-        System.out.printf("Files > MaxFS: %d files%n", report.distribution()[numberOfBands]);
-        System.out.println(report.toString());
+        System.out.printf("Files > %s: %d files%n", formatSize(maxFileSize), report.distribution()[numberOfBands]);
+    }
+
+    private static String formatSize(long bytes) {
+        if (bytes >= MB && bytes % MB == 0) {
+            return (bytes / MB) + " MB";
+        }
+        if (bytes >= KB && bytes % KB == 0) {
+            return (bytes / KB) + " KB";
+        }
+        return bytes + " B";
     }
 }
