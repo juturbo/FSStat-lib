@@ -28,9 +28,9 @@ public class Test {
         for (int i = 0; i < numberOfBands; i++) {
             long lowerBound = i * bandSize;
             long upperBoundExclusive = (i + 1) * bandSize;
-            System.out.printf("Band %d %s: %d files%n", i, formatBandRange(lowerBound, upperBoundExclusive), report.distribution()[i]);
+            System.out.printf("Band %d %s: %d files\n", i, formatBandRange(lowerBound, upperBoundExclusive), report.distribution()[i]);
         }
-        System.out.printf("Band %d [%s, +inf): %d files%n", numberOfBands, formatSize(maxFileSize), report.distribution()[numberOfBands]);
+        System.out.printf("Band %d [%s, +inf): %d files\n", numberOfBands, formatSize(maxFileSize), report.distribution()[numberOfBands]);
     }
 
     private static String formatBandRange(long lowerBound, long upperBoundExclusive) {
