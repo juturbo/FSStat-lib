@@ -28,7 +28,7 @@ public class FSStatLib {
             for (Path entry : stream) {
                 if (Files.isDirectory(entry)) {
                     subDirTasks.add(executor.submit(() -> computeDirectory(entry, maxFS, nb, executor)));
-                } else if (Files.isRegularFile(entry)) {
+                } else if (Files.isRegularFile(entry, LinkOption.NOFOLLOW_LINKS)) {
                     totalFiles++;
 
                     long size = Files.size(entry);
