@@ -12,7 +12,7 @@ public class Test {
     public static void main(String[] args) throws Exception {
         FSStatLib lib = new FSStatLib();
         
-        String targetDir = "src/testFolder";
+        String targetDir = "src/virtualthread/testFolder";
         long maxFileSize =  KB / 2;
         int numberOfBands = 4;
 
