@@ -9,16 +9,16 @@ public class Test {
     private static final long KB = 1024;
     private static final long MB = KB * 1024;
 
-    public static void main(String[] args) throws Exception {
-        FSStatLib lib = new FSStatLib();
-        
-        String targetDir = "src/virtualthread/testFolder";
+    static void main() throws Exception {
+        String targetDir = "testFolder"; // Execute inside virtualthread folder
+        // String targetDir = "C:/";
         long maxFileSize =  KB / 2;
         int numberOfBands = 4;
 
         var startTime = System.currentTimeMillis();
-        Future<FSReport> reportFuture = lib.getFSReport(targetDir, maxFileSize, numberOfBands);
+        Future<FSReport> reportFuture = FSStatLib.getFSReport(targetDir, maxFileSize, numberOfBands);
 
+        System.out.println("Starting report...");
         FSReport report = reportFuture.get();
         var elapsedTime = System.currentTimeMillis() - startTime;
 

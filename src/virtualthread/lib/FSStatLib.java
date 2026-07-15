@@ -8,7 +8,7 @@ import java.util.concurrent.*;
 
 public class FSStatLib {
 
-    public Future<FSReport> getFSReport(String d, long maxFS, int nb) {
+    public static Future<FSReport> getFSReport(String d, long maxFS, int nb) {
         FutureTask<FSReport> rootTask = new FutureTask<>(() -> {
             try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
                 return computeDirectory(Path.of(d), maxFS, nb, executor);
@@ -18,7 +18,7 @@ public class FSStatLib {
         return rootTask;
     }
 
-    private FSReport computeDirectory(Path dir, long maxFS, int nb, ExecutorService executor) {
+    private static FSReport computeDirectory(Path dir, long maxFS, int nb, ExecutorService executor) {
         long totalFiles = 0;
         long[] distribution = new long[nb + 1];
         List<Future<FSReport>> subDirTasks = new ArrayList<>();
